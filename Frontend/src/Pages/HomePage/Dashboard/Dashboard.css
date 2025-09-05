@@ -1,0 +1,94 @@
+.dashboard-container {
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.dashboard-header {
+  background: linear-gradient(90deg, #14532d, #f59e0b);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.logout-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.welcome-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card.green {
+  border-top: 5px solid #16a34a;
+}
+.stat-card.gold {
+  border-top: 5px solid #f59e0b;
+}
+
+.progress-bar {
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0;
+  height: 10px;
+}
+.progress.green {
+  background: #16a34a;
+  height: 100%;
+}
+.progress.gold {
+  background: #f59e0b;
+  height: 100%;
+}
+
+.chart-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recent-activity {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+.activity-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.activity-icon {
+  font-size: 20px;
+}
+.user-info {
+  display: flex;
+  justify-content: space-between;
+}

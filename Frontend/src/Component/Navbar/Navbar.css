@@ -1,0 +1,56 @@
+/* frontend/src/components/Navbar.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #007764; /* Blue like Al Infaq */
+  padding: 0.8rem 2rem;
+  color: white;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-logo {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.brand-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar-nav li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.navbar-nav li a:hover {
+  color: #ffcc00; /* yellow hover effect */
+}
+
+.signin-btn {
+  padding: 6px 14px;
+  background: #ffcc00;
+  border-radius: 6px;
+  font-weight: bold;
+  color: black !important;
+}
+
+.signin-btn:hover {
+  background: #ffaa00;
+}

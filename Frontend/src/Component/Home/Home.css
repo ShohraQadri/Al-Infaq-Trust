@@ -1,0 +1,83 @@
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.6);
+}
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  top: 40%;
+  transform: translateY(-50%);
+}
+.hero-overlay h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.hero-overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.cta-button {
+  background: #a57c00;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+}
+.cta-button:hover {
+  background: #16a34a;
+}
+
+/* About & Infaq */
+.green-bg {
+  background: #16a34a15;
+  padding: 60px 20px;
+}
+.gold-bg {
+  background: #facc1515;
+  padding: 60px 20px;
+}
+
+/* Quran Quotes */
+.quotes-section {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.quote-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+.urdu-text {
+  font-family: "Noto Nastaliq Urdu", serif;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  direction: rtl;
+}
+.eng-text {
+  font-size: 0.95rem;
+  font-style: italic;
+}
