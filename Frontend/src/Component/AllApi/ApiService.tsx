@@ -1,6 +1,5 @@
-// src/AllApi/ApiService.ts
+import ForgetPassword from "../../Pages/FogetPass/ForgetPassword";
 
-// function to get API base URL
 export const getApiUrl = () => {
   return import.meta.env.VITE_API_URL || "http://localhost:3001";
 };
@@ -11,6 +10,9 @@ export const endpoints = {
   signin: () => `${getApiUrl()}/api/auth/signin`,
   signup: () => `${getApiUrl()}/api/auth/signup`,
   health: () => `${getApiUrl()}/api/health`,
+  forgotPassword: () => `${getApiUrl()}/api/auth/forgot-password`,
+  resetPassword: (token: string) =>
+    `${getApiUrl()}/api/auth/reset-password/${token}`,
 };
 
 // POST request helper
@@ -23,8 +25,8 @@ export const postRequest = async (url: string, body: any) => {
   });
 
   const text = await response.text();
-  console.log("👉 Response status:", response.status);
-  console.log("👉 Raw response text:", text);
+  console.log("Response status:", response.status);
+  console.log("Raw response text:", text);
 
   const data = text ? JSON.parse(text) : {};
 

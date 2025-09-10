@@ -5,7 +5,7 @@ import logo from "../../assets/logo.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token"); // check login
+  const token = localStorage.getItem("token");
 
   const handleLogout = () => {
     localStorage.removeItem("token");

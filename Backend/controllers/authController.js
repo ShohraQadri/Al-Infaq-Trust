@@ -1,7 +1,10 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const crypto = require("crypto");
+;
 
+// signIn controller
 const signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -41,6 +44,7 @@ const signIn = async (req, res) => {
   }
 };
 
+// signUp controller
 const signUp = async (req, res) => {
   try {
     const { email, password, name } = req.body;
@@ -87,7 +91,97 @@ const signUp = async (req, res) => {
   }
 };
 
+// Step 1: Forgot Password
+const nodemailer = require("nodemailer");
+
+const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+console.log("User found in DB:", user.email);
+    // Reset token generate
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    const resetTokenExpire = Date.now() + 15 * 60 * 1000; // 15 min
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpire = resetTokenExpire;
+    await user.save();
+
+    const resetUrl = `https://al-infaq-trust.vercel.app/reset-password/${resetToken}`;
+
+    // Mail setup
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.EMAIL_USER, // .env se
+        pass: process.env.EMAIL_PASS, // .env se
+      },
+    });
+console.log("Sending password reset email to:", user.email);
+
+   const mailOptions = {
+  from: `"Al-Infaq Trust" <${process.env.EMAIL_USER}>`, 
+  to: user.email, 
+  subject: "Password Reset Request",
+  html: `<p>Click the link below to reset your password:</p>
+         <a href="${resetUrl}">${resetUrl}</a>
+         <p>This link will expire in 15 minutes.</p>`,
+};
+console.log("Sending password reset email to:", user.email); 
+await transporter.sendMail(mailOptions);
+
+
+    res.json({ message: "Password reset link sent to email" });
+  } catch (error) {
+    console.error("Forgot password error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+// Step 2: Reset Password
+const resetPassword = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { password } = req.body;
+console.log("Reset URL:", resetUrl);
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpire: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: "Invalid or expired token" });
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Update password and clear reset fields
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save();
+
+    res.json({ message: "Password has been reset successfully" });
+  } catch (error) {
+    console.error("Reset password error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+console.log("Email user:", process.env.EMAIL_USER);
+console.log("Email pass:", process.env.EMAIL_PASS ? "exists" : "missing");
+
+
 module.exports = {
   signIn,
-  signUp
+  signUp,
+  forgotPassword,
+  resetPassword
 };
