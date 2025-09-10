@@ -25,7 +25,6 @@ const SignIn: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
 
-  // ✅ Check if already logged in
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -76,9 +75,11 @@ const SignIn: React.FC = () => {
     setErrors({});
 
     try {
+      const API_URL = process.env.REACT_APP_API_URL;
+
       const url = isSignUp
-        ? "http://localhost:3001/api/auth/signup"
-        : "http://localhost:3001/api/auth/signin";
+        ? `${API_URL}/api/auth/signup`
+        : `${API_URL}/api/auth/signin`;
 
       const requestBody = isSignUp
         ? { name, email: formData.email, password: formData.password }
