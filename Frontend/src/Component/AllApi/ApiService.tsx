@@ -4,6 +4,7 @@
 export const getApiUrl = () => {
   return import.meta.env.VITE_API_URL || "http://localhost:3001";
 };
+console.log(import.meta.env.VITE_API_URL);
 
 // endpoints
 export const endpoints = {
