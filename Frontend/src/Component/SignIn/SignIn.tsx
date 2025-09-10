@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./SignIn.css";
+import { endpoints, postRequest } from "../AllApi/ApiService";
 
 interface FormData {
   email: string;
@@ -64,59 +65,30 @@ const SignIn: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const formErrors = validateForm();
-    if (Object.keys(formErrors).length > 0) {
-      setErrors(formErrors);
-      return;
-    }
-
     setIsSubmitting(true);
     setErrors({});
 
     try {
-      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
-
-      const url = isSignUp
-        ? `${API_URL}/api/auth/signup`
-        : `${API_URL}/api/auth/signin`;
-
       const requestBody = isSignUp
         ? { name, email: formData.email, password: formData.password }
         : formData;
 
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestBody),
-      });
+      const url = isSignUp ? endpoints.signup() : endpoints.signin();
+      console.log("👉 Submitting to:", url, requestBody);
+      const data = await postRequest(url, requestBody);
 
-      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
 
-      if (response.ok) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-
-        toast.success(
-          isSignUp ? "Sign up successful! 🎉" : "Sign in successful! 👋"
-        );
-
-        setTimeout(() => {
-          window.location.href = "/dashboard";
-        }, 1500);
-      } else {
-        setErrors({ submit: data.message });
-        toast.error(data.message || "Something went wrong!");
-      }
-    } catch (error) {
-      const errorMessage = "Network error. Please try again.";
-      setErrors({ submit: errorMessage });
-      toast.error(errorMessage);
+      toast.success(isSignUp ? "Sign up successful!" : "Sign in successful!");
+      setTimeout(() => (window.location.href = "/dashboard"), 1500);
+    } catch (error: any) {
+      setErrors({ submit: error.message });
+      toast.error(error.message || "Something went wrong!");
     } finally {
       setIsSubmitting(false);
     }
   };
-
   const toggleMode = () => {
     setIsSignUp(!isSignUp);
     setErrors({});
