@@ -101,3 +101,7 @@
 .toggle-mode-btn:hover {
   color: #d4af37;
 }
+.signin-links {
+  display: flex;
+  flex-direction: column;
+}
