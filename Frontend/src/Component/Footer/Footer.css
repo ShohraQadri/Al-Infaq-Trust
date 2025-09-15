@@ -1,0 +1,81 @@
+.footer {
+  background: linear-gradient(135deg, #064e3b, #065f46);
+  color: #fff;
+  position: relative;
+}
+
+.footer-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #facc15; /* gold */
+}
+
+.footer-desc {
+  margin-top: 0.5rem;
+  color: #d1d5db;
+  font-size: 0.95rem;
+}
+
+.footer-subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #16a34a; /* green */
+  margin-bottom: 0.75rem;
+}
+
+.footer-link {
+  color: #d1d5db;
+  font-size: 0.95rem;
+  transition: color 0.3s ease, padding-left 0.3s ease;
+  display: inline-block;
+}
+
+.footer-link:hover {
+  color: #facc15;
+  padding-left: 5px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.social-link {
+  color: #d1d5db;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.social-link:hover {
+  color: #facc15;
+  transform: scale(1.2);
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.footer-quote {
+  margin-top: 2rem;
+  text-align: center;
+  font-style: italic;
+}
+
+.quote-urdu {
+  font-family: "Noto Nastaliq Urdu", serif;
+  font-size: 1.2rem;
+  direction: rtl;
+  margin-bottom: 0.5rem;
+  color: #facc15; /* gold highlight */
+}
+
+.quote-eng {
+  font-size: 0.9rem;
+  color: #d1d5db;
+}
+ul.space-y-2 {
+  display: flex;
+  gap: 2rem;
+}

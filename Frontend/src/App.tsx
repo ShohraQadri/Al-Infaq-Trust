@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import Navbar from "./Component/Navbar/Navbar";
 import ForgetPassword from "./Pages/FogetPass/ForgetPassword";
 import ResetPassword from "./Pages/ResetPassword/ResetPassword";
+import Footer from "./Component/Footer/Footer";
 
 function App() {
   return (
@@ -21,6 +22,11 @@ function App() {
           <Route path="/forgot-password" element={<ForgetPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
         </Routes>
+
+        {/* Footer */}
+        <Footer />
+
+        {/* Toast Container */}
         <ToastContainer
           position="top-right"
           autoClose={3000}
